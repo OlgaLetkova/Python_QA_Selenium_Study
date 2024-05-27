@@ -1,21 +1,12 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import pytest
+from page_objects import ProductPage, TopElement
 
 
-def test_switch_currencies_to_euro(browser, url):
+@pytest.mark.parametrize("currency", ["€ Euro", "£ Pound Sterling"])
+def test_switch_currency(browser, url, currency):
     browser.get(url)
-    browser.find_element(By.CLASS_NAME, "list-inline").click()
-    wait = WebDriverWait(browser, 3)
-    wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "€ Euro"))).click()
-    value = browser.find_element(By.CSS_SELECTOR, ".price-new").text
-    assert "€" in value
-
-
-def test_switch_currencies_to_pound(browser, url):
-    browser.get(url)
-    browser.find_element(By.CLASS_NAME, "list-inline").click()
-    wait = WebDriverWait(browser, 3)
-    wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "£ Pound Sterling"))).click()
-    value = browser.find_element(By.CSS_SELECTOR, ".price-new").text
-    assert "£" in value
+    currency_element = TopElement(browser)
+    currency_element.open_currency_dialog()
+    currency_element.click_currency(currency=currency)
+    value = ProductPage(browser).get_product_price()
+    assert currency.split(" ")[0] in value

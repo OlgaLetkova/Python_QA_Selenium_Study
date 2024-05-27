@@ -1,14 +1,14 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import pytest
+from page_objects.product_page import ProductPage
 
 
-def test_mac_card(browser, url):
-    browser.get(url + "en-gb/product/laptop-notebook/macbook")
-    wait = WebDriverWait(browser, 1)
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"img[title='MacBook']")))
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Add to Cart']")))
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "button[formaction$='wishlist.add']")))
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "button[formaction$='compare.add']")))
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href$='#tab-specification']")))
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href$='#tab-review']")))
+@pytest.mark.parametrize("product", ["MacBook"])
+def test_mac_card(browser, url, product):
+    browser.get(url + f"en-gb/product/laptop-notebook/{product}")
+    product_page = ProductPage(browser)
+    product_page.visibility_of_product_image(product=product)
+    product_page.add_to_cart_is_clickable()
+    product_page.visibility_of_wish_list_button()
+    product_page.visibility_of_compare_button()
+    product_page.specification_is_clickable()
+    product_page.review_is_clickable()
