@@ -1,18 +1,16 @@
+import pytest
+from page_objects.menu_catalog_element import MenuCatalogElement
+from page_objects.catalog_page import CatalogPage
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-
-def test_catalog_page(browser, url):
+@pytest.mark.parametrize(("section", "product"), [("Desktops", "Mac (1)"), ("Laptops & Notebooks", "Macs (0)")])
+def test_catalog_page(browser, url, section, product):
     browser.get(url)
-    browser.find_element(By.XPATH, "//*[text()='Desktops']").click()
-    wait = WebDriverWait(browser, 1)
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Mac (1)")))
-    browser.find_element(By.XPATH, "//*[text()='Laptops & Notebooks']").click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Show All Laptops & Notebooks")))
-    browser.find_element(By.LINK_TEXT, "Show All Laptops & Notebooks").click()
-    wait.until(EC.visibility_of_element_located((By.ID, "display-control")))
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Product Compare (0)']")))
-    wait.until(EC.visibility_of_element_located((By.ID, "product-list")))
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "img[title='Laptops & Notebooks']")))
+    catalog = MenuCatalogElement(browser)
+    catalog.click_menu_section(section=section)
+    catalog.visibility_of_product(product=product)
+    catalog.click_all_section_products(section=section)
+    catalog_page = CatalogPage(browser)
+    catalog_page.visibility_of_display_control()
+    catalog_page.visibility_of_product_list()
+    catalog_page.visibility_of_section_image(section=section)
