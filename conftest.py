@@ -107,10 +107,8 @@ def create_product(browser, login_as_admin, section, item):
     add_product_form.switch_tab(tab="SEO")
     add_product_form.input_product_field(field="Keyword", value="qwerty128")
     browser.find_element(By.CSS_SELECTOR, 'html').send_keys(Keys.PAGE_UP)
-    time.sleep(1)
     add_product_form.save_product()
     AlertSuccessElement(browser).success_message()
-    yield
 
 
 @pytest.fixture()
