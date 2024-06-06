@@ -1,5 +1,6 @@
 import time
 
+import allure
 import pytest
 from page_objects import AlertSuccessElement
 from page_objects.admin_home_page import DashBoardPage
@@ -10,6 +11,7 @@ from page_objects.alert_element import AlertConfirmElement
 product_test_general_data = read_lines_from_csv()
 
 
+@allure.title("Удаление товара из списка в разделе администратора")
 @pytest.mark.parametrize(("section", "item", "general_data"),
                          [("catalog", "Products", product_test_general_data)])
 def test_delete_product(browser, create_product, login_as_admin, section, item, general_data):

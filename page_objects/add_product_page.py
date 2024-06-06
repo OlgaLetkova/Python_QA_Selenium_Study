@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.base_page import BasePage
 
@@ -15,8 +16,12 @@ class AddProductPage(BasePage):
     def input_product_field_text_area(self, text_field, text_value):
         self.input_value(locator=(By.CSS_SELECTOR, f"textarea[placeholder='{text_field}']"), text=text_value)
 
+    @allure.step("Переключаю на вкладку {tab}")
     def switch_tab(self, tab):
+        self.logger.info("Switch tab %s" % tab)
         self.click(locator=(By.LINK_TEXT, f"{tab}"))
 
+    @allure.step("Сохраняю карточку нового товара")
     def save_product(self):
+        self.logger.info("Click 'SAVE' element")
         self.click(self.SAVE_PRODUCT_BUTTON)

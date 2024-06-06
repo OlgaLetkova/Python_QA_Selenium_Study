@@ -1,0 +1,17 @@
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:conftest.py:72 Browser <selenium.webdriver.firefox.webdriver.WebDriver (session="d7f2e03f-0292-4a2b-968f-79d6ba5a4e13")> started
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_home_page.py:53 Open dashboard menu section catalog
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_home_page.py:59 Click dashboard menu item Products
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:21 Checking visibility of products list
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:27 Click 'ADD NEW' button
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:add_product_page.py:21 Switch tab Data
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:add_product_page.py:21 Switch tab SEO
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:add_product_page.py:26 Click 'SAVE' element
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:alert_element.py:19 Waiting for success message
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_home_page.py:59 Click dashboard menu item Products
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:32 Filtering table by Product Name
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:38 Check if element AUM-L41 is present in table
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:49 Getting new product name
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:admin_elements_table_page.py:60 Click 'DELETE' element
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:alert_element.py:38 Confirm action on page
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:alert_element.py:19 Waiting for success message
+[32mINFO    [0m test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0]:conftest.py:76 ===> Test test_add_new_product[catalog-Products-general_data0-text_data0-tabs_list0-second_tab_data0] finished at 2024-06-06 10:31:53.613591

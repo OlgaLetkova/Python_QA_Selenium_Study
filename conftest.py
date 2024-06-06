@@ -18,6 +18,8 @@ from page_objects.admin_home_page import DashBoardPage
 from page_objects.add_product_page import AddProductPage
 from selenium.webdriver.common.by import By
 from files import USER_DATA_FILE_PATH
+import logging
+import datetime
 
 
 def pytest_addoption(parser):
@@ -34,11 +36,20 @@ def pytest_addoption(parser):
         "--url",
         default="http://192.168.2.122:8081/"
     )
+    parser.addoption("--log_level", action="store", default="INFO")
 
 
 @pytest.fixture()
 def browser(request):
     browser_name = request.config.getoption("--browser")
+    log_level = request.config.getoption("--log_level")
+
+    logger = logging.getLogger(request.node.name)
+    file_handler = logging.FileHandler(f"logs/{request.node.name}.log")
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(filename)s %(message)s'))
+    logger.addHandler(file_handler)
+    logger.setLevel(level=log_level)
+
     yadriver = request.config.getoption("--yadriver")
     if browser_name == "ya":
         options = Options()
@@ -56,9 +67,16 @@ def browser(request):
 
     browser.maximize_window()
 
-    yield browser
+    browser.logger = logger
 
-    browser.close()
+    logger.info("Browser %s started" % browser)
+
+    def fin():
+        browser.quit()
+        logger.info("===> Test %s finished at %s" % (request.node.name, datetime.datetime.now()))
+
+    request.addfinalizer(fin)
+    yield browser
 
 
 @pytest.fixture
