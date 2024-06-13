@@ -25,3 +25,13 @@ class TopElement(BasePage):
     def click_registration(self):
         self.logger.info("Click 'Registration'")
         self.click(locator=(By.LINK_TEXT, "Register"))
+
+    def get_currency_locator(self, currency):
+        match currency:
+            case "Euro":
+                currency_locator = "€ Euro"
+            case "Pound":
+                currency_locator = "£ Pound Sterling"
+            case _:
+                raise ValueError(f"Unsupported currency: {currency}")
+        return currency_locator

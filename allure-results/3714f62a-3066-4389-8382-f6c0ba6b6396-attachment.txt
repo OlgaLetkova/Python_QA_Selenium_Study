@@ -1,0 +1,6 @@
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:conftest.py:72 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="ce27784e1a7bcff8ab516c2ee3e37863")> started
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:top_element.py:12 Opening currency dialog
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:top_element.py:17 Click 'Currency'
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:menu_catalog_element.py:10 Click menu section Tablets in dashboard
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:product_page.py:16 Getting product price
+[32mINFO    [0m test_switch_currency_catalog[Euro-Tablets]:conftest.py:76 ===> Test test_switch_currency_catalog[Euro-Tablets] finished at 2024-06-13 18:20:37.275372

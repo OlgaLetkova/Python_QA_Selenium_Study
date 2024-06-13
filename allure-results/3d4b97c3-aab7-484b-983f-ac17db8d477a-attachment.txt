@@ -1,6 +1,0 @@
-[32mINFO    [0m test_add_item_to_cart:conftest.py:72 Browser <selenium.webdriver.firefox.webdriver.WebDriver (session="24e65459-8bd1-4164-82c9-0670b6d7016b")> started
-[32mINFO    [0m test_add_item_to_cart:home_page.py:15 Adding random product to cart from home page
-[32mINFO    [0m test_add_item_to_cart:alert_element.py:19 Waiting for success message
-[32mINFO    [0m test_add_item_to_cart:cart_element.py:17 Click cart dialog
-[32mINFO    [0m test_add_item_to_cart:cart_element.py:23 Getting quantity of products in cart
-[32mINFO    [0m test_add_item_to_cart:conftest.py:76 ===> Test test_add_item_to_cart finished at 2024-06-06 10:32:18.353321

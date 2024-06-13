@@ -1,0 +1,4 @@
+[32mINFO    [0m test_login_page_admin:conftest.py:72 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="548bda3ed0d570cd7820b629bea4233d")> started
+[32mINFO    [0m test_login_page_admin:admin_home_page.py:11 Getting admin profile data
+[32mINFO    [0m test_login_page_admin:admin_home_page.py:25 Click user profile in dialog
+[32mINFO    [0m test_login_page_admin:conftest.py:76 ===> Test test_login_page_admin finished at 2024-06-13 18:19:56.850010
