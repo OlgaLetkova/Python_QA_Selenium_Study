@@ -1,0 +1,3 @@
+[32mINFO    [0m test_add_item_to_cart:conftest.py:72 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="a06a57f45588e6e076f98d696ad521fd")> started
+[32mINFO    [0m test_add_item_to_cart:home_page.py:15 Adding random product to cart from home page
+[32mINFO    [0m test_add_item_to_cart:conftest.py:76 ===> Test test_add_item_to_cart finished at 2024-06-13 18:19:12.716750

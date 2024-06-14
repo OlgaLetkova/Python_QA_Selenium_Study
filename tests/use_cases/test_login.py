@@ -1,8 +1,11 @@
+import allure
+
 from config import OPENCART_USERNAME, OPENCART_PASSWORD
 from page_objects.login_page import LoginPage
 from page_objects.admin_home_page import UserProfileElement, DashBoardPage, UserProfileDialog, UserProfilePage
 
 
+@allure.title("Авторизация администратором")
 def test_login_page_admin(browser, url):
     browser.get(url + "/administration")
     LoginPage(browser).login(OPENCART_USERNAME, OPENCART_PASSWORD)

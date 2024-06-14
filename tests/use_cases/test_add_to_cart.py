@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from page_objects.home_page import HomePage
@@ -7,6 +8,7 @@ from page_objects.cart_element import CartElement
 from page_objects.alert_element import AlertSuccessElement
 
 
+@allure.title("Добавление рандомного товара в корзину с главной страницы")
 def test_add_item_to_cart(browser, url):
     browser.get(url)
     HomePage(browser).add_random_item_to_cart()
