@@ -72,6 +72,7 @@ def browser(request):
                     "browserName": browser_name,
                     "browserVersion": version,
                     "selenoid:options": {
+                        "name": request.node.name,
                         "enableVNC": vnc
                     }
                 }
@@ -94,7 +95,7 @@ def browser(request):
                     "browserName": "firefox",
                     "browserVersion": version,
                     "selenoid:options": {
-                        "name": "Session started using curl command...",
+                        "name": request.node.name,
                         "sessionTimeout": "1m",
                         "enableVNC": vnc
                     }
