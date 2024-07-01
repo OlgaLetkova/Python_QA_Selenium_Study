@@ -24,13 +24,14 @@ import datetime
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome")
-    parser.addoption("--url", default="http://192.168.2.90:8081/")
+    parser.addoption("--url", default="http://192.168.1.50:8081/")
     parser.addoption("--log_level", action="store", default="INFO")
     parser.addoption("--executor", action="store", default="127.0.0.1")
     parser.addoption("--mobile", action="store_true")
     parser.addoption("--vnc", action="store_true")
     parser.addoption("--headless", default="False")
     parser.addoption("--run", default="local")
+    parser.addoption("--bv")
 
 
 @pytest.fixture()
@@ -41,6 +42,7 @@ def browser(request):
     vnc = request.config.getoption("--vnc")
     headless = request.config.getoption("--headless")
     run = request.config.getoption("--run")
+    version = request.config.getoption("--bv")
 
     executor_url = f"http://{executor}:4444/wd/hub"
 
@@ -68,6 +70,10 @@ def browser(request):
             elif run == "remote":
                 caps = {
                     "browserName": browser_name,
+                    "browserVersion": version,
+                    "selenoid:options": {
+                        "enableVNC": vnc
+                    }
                 }
                 for k, v in caps.items():
                     options.set_capability(k, v)
@@ -85,8 +91,13 @@ def browser(request):
                 browser = webdriver.Firefox(service=FFService(), options=options)
             elif run == "remote":
                 caps = {
-                    "browserName": browser_name,
-                    "version": "124.0"
+                    "browserName": "firefox",
+                    "browserVersion": version,
+                    "selenoid:options": {
+                        "name": "Session started using curl command...",
+                        "sessionTimeout": "1m",
+                        "enableVNC": vnc
+                    }
                 }
                 for k, v in caps.items():
                     options.set_capability(k, v)
