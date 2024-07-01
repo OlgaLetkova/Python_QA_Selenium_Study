@@ -23,26 +23,28 @@ import datetime
 
 
 def pytest_addoption(parser):
-    parser.addoption(
-        "--browser",
-        default="chrome"
-    )
-    parser.addoption(
-        "--yadriver",
-        action="store_true",
-        default="C:/Users/allet/selenium_drivers/yandexdriver.exe"
-    )
-    parser.addoption(
-        "--url",
-        default="http://192.168.2.122:8081/"
-    )
+    parser.addoption("--browser", default="chrome")
+    parser.addoption("--url", default="http://192.168.1.50:8081/")
     parser.addoption("--log_level", action="store", default="INFO")
+    parser.addoption("--executor", action="store", default="127.0.0.1")
+    parser.addoption("--mobile", action="store_true")
+    parser.addoption("--vnc", action="store_true")
+    parser.addoption("--headless", default="False")
+    parser.addoption("--run", default="local")
+    parser.addoption("--bv")
 
 
 @pytest.fixture()
 def browser(request):
     browser_name = request.config.getoption("--browser")
     log_level = request.config.getoption("--log_level")
+    executor = request.config.getoption("--executor")
+    vnc = request.config.getoption("--vnc")
+    headless = request.config.getoption("--headless")
+    run = request.config.getoption("--run")
+    version = request.config.getoption("--bv")
+
+    executor_url = f"http://{executor}:4444/wd/hub"
 
     logger = logging.getLogger(request.node.name)
     file_handler = logging.FileHandler(f"logs/{request.node.name}.log")
@@ -50,20 +52,64 @@ def browser(request):
     logger.addHandler(file_handler)
     logger.setLevel(level=log_level)
 
-    yadriver = request.config.getoption("--yadriver")
-    if browser_name == "ya":
-        options = Options()
-        options.binary_location = "C:/Program Files (x86)/Yandex/YandexBrowser/Application/browser.exe"
-        service = Service(executable_path=yadriver)
-        browser = webdriver.Chrome(service=service, options=options)
-    elif browser_name == "chrome":
-        options = Options()
-        browser = webdriver.Chrome(service=Service(), options=options)
-    elif browser_name == "ff":
-        options = FFOptions()
-        browser = webdriver.Firefox(service=FFService(), options=options)
-    else:
-        raise ValueError(f"Browser {browser_name} not supported")
+    match browser_name:
+        case "ya":
+            options = Options()
+            if headless == "True":
+                options.add_argument("headless=new")
+            options.binary_location = "/usr/bin/yandex-browser"
+            service = Service(executable_path="/home/olelet/Загрузки/drivers/yandexdriver")
+            browser = webdriver.Chrome(service=service, options=options)
+
+        case "chrome":
+            options = Options()
+            if headless == "True":
+                options.add_argument("headless=new")
+            if run == "local":
+                browser = webdriver.Chrome(service=Service(), options=options)
+            elif run == "remote":
+                caps = {
+                    "browserName": browser_name,
+                    "browserVersion": version,
+                    "selenoid:options": {
+                        "name": request.node.name,
+                        "enableVNC": vnc
+                    }
+                }
+                for k, v in caps.items():
+                    options.set_capability(k, v)
+
+                browser = webdriver.Remote(
+                    command_executor=executor_url,
+                    options=options
+                )
+
+        case "ff":
+            options = FFOptions()
+            if headless == "True":
+                options.add_argument("headless=new")
+            if run == "local":
+                browser = webdriver.Firefox(service=FFService(), options=options)
+            elif run == "remote":
+                caps = {
+                    "browserName": "firefox",
+                    "browserVersion": version,
+                    "selenoid:options": {
+                        "name": request.node.name,
+                        "sessionTimeout": "1m",
+                        "enableVNC": vnc
+                    }
+                }
+                for k, v in caps.items():
+                    options.set_capability(k, v)
+
+                browser = webdriver.Remote(
+                    command_executor=executor_url,
+                    options=options
+                )
+
+        case _:
+            raise ValueError(f"Browser {browser_name} not supported")
 
     browser.maximize_window()
 

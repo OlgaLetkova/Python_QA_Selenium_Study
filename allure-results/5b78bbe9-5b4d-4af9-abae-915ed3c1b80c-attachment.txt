@@ -1,0 +1,5 @@
+[32mINFO    [0m test_switch_currency_home_page[Euro]:conftest.py:106 Browser <selenium.webdriver.firefox.webdriver.WebDriver (session="325a928e-b13b-42c2-a25a-57dd31cd9fcc")> started
+[32mINFO    [0m test_switch_currency_home_page[Euro]:top_element.py:12 Opening currency dialog
+[32mINFO    [0m test_switch_currency_home_page[Euro]:top_element.py:17 Click 'Currency'
+[32mINFO    [0m test_switch_currency_home_page[Euro]:product_page.py:16 Getting product price
+[32mINFO    [0m test_switch_currency_home_page[Euro]:conftest.py:110 ===> Test test_switch_currency_home_page[Euro] finished at 2024-06-28 18:45:57.420982
