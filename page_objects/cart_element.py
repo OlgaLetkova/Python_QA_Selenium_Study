@@ -23,3 +23,16 @@ class CartElement:
         self.logger.info("Getting quantity of products in cart")
         item_quantity = self.browser.find_element(*self.PRODUCT_QUANTITY).text
         return item_quantity
+
+    def cart_is_enabled(self, currency):
+        wait = WebDriverWait(self.browser, 3)
+        match currency:
+            case "€":
+                (wait.until(EC.visibility_of_element_located((By.XPATH, f"//*[text()=' 0 item(s) - 0.00{currency}']")))
+                 .is_displayed())
+            case "£":
+                (wait.until(EC.visibility_of_element_located((By.XPATH, f"//*[text()=' 0 item(s) - {currency}0.00']")))
+                 .is_displayed())
+            case "$":
+                (wait.until(EC.visibility_of_element_located((By.XPATH, f"//*[text()=' 0 item(s) - {currency}0.00']")))
+                 .is_displayed())
