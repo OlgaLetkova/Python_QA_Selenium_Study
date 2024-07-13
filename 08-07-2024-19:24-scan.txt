@@ -1,0 +1,20 @@
+Отчёт о состоянии системы:
+Пользователи системы: {'colord', 'rtkit', 'USER', 'olelet', 'avahi', 'kernoops', 'root', 'systemd+', 'syslog', 'message+'}
+Процессов запущено: 272
+
+Пользовательских процессов:
+olelet: 115
+kernoops: 2
+colord: 1
+rtkit: 1
+root: 145
+systemd+: 3
+avahi: 2
+message+: 1
+syslog: 1
+USER: 1
+
+Всего памяти используется: 82.3
+Всего CPU используется: 47.1
+Больше всего памяти использует: /snap/pycharm-commun
+Больше всего CPU использует: /snap/pycharm-commun
