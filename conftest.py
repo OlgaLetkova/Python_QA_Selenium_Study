@@ -32,6 +32,8 @@ def pytest_addoption(parser):
     parser.addoption("--headless", default="False")
     parser.addoption("--run", default="local")
     parser.addoption("--bv")
+    parser.addoption("--host", default="127.0.0.1")
+    parser.addoption("--port", default="5000")
 
 
 @pytest.fixture()
@@ -191,3 +193,13 @@ def delete_user(browser, url):
     elements_page.click_delete_button_in_short_float()
     AlertConfirmElement(browser).confirm_action()
     AlertSuccessElement(browser).success_message()
+
+
+@pytest.fixture(scope="session")
+def host(request):
+    return request.config.getoption("--host")
+
+
+@pytest.fixture(scope="session")
+def port(request):
+    return request.config.getoption("--port")
