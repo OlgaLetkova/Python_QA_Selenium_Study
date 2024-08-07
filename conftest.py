@@ -29,7 +29,7 @@ def pytest_addoption(parser):
     parser.addoption("--executor", action="store", default="127.0.0.1")
     parser.addoption("--mobile", action="store_true")
     parser.addoption("--vnc", action="store_true")
-    parser.addoption("--headless", default="False")
+    parser.addoption("--headless", default="True")
     parser.addoption("--run", default="local")
     parser.addoption("--bv")
     parser.addoption("--host", default="127.0.0.1")
@@ -55,7 +55,7 @@ def browser(request):
     logger.setLevel(level=log_level)
 
     match browser_name:
-        case "ya":
+        case "yandex":
             options = Options()
             if headless == "True":
                 options.add_argument("headless=new")
@@ -86,7 +86,7 @@ def browser(request):
                     options=options
                 )
 
-        case "ff":
+        case "firefox":
             options = FFOptions()
             if headless == "True":
                 options.add_argument("headless=new")
