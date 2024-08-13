@@ -4,5 +4,5 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 ENTRYPOINT ["pytest", "--run=remote"]
-CMD ["--executor", "--browser"]
+CMD ["--executor", "--browser", "--url"]
 

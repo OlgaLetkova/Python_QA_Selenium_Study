@@ -24,7 +24,7 @@ def test_new_user_registration(browser, url, user_field_data, delete_user):
         register_form.form_filling(field=element["field"], value=element["value"])
     register_form.click_privacy_policy()
     register_form.click_continue_button()
-    time.sleep(1)
+    time.sleep(3)
     assert register_form.success_account_creation() == "Your Account Has Been Created!", (
             "Пользователь не зарегистрирован" and allure.attach(body=browser.get_screenshot_as_png(),
                                                                 name="screenshot_image",
