@@ -31,7 +31,7 @@ def pytest_addoption(parser):
     parser.addoption("--vnc", action="store_true")
     parser.addoption("--headless", default="True")
     parser.addoption("--run", default="local")
-    parser.addoption("--bv")
+    parser.addoption("--bv", default="125.0")
     parser.addoption("--host", default="127.0.0.1")
     parser.addoption("--port", default="5000")
 
