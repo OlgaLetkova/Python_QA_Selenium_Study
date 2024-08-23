@@ -1,0 +1,2 @@
+OPENCART_USERNAME = "user"
+OPENCART_PASSWORD = "qwerty!123"
