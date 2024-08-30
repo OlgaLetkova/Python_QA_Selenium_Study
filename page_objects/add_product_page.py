@@ -6,6 +6,7 @@ from page_objects.base_page import BasePage
 class AddProductPage(BasePage):
     ADD_PRODUCT_HEADER = By.XPATH, "//*[text()=' Add Product']"
     SAVE_PRODUCT_BUTTON = By.CSS_SELECTOR, "div[class='float-end'] button"
+    ADD_PRODUCT_MODEL = By.TAG_NAME, "legend"
 
     def visibility_of_add_product(self):
         self.get_element(self.ADD_PRODUCT_HEADER)
@@ -25,3 +26,6 @@ class AddProductPage(BasePage):
     def save_product(self):
         self.logger.info("Click 'SAVE' element")
         self.click(self.SAVE_PRODUCT_BUTTON)
+
+    def visibility_of_add_data_tab(self):
+        self.get_element(self.ADD_PRODUCT_MODEL)

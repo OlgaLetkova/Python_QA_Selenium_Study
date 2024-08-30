@@ -53,6 +53,8 @@ class ElementsTablePage(BasePage):
 
     @allure.step("Выбираю элемент списка, кликая чекбокс рядом с ним")
     def click_element_in_table(self):
+        wait = WebDriverWait(self.browser, 2)
+        wait.until(EC.visibility_of_element_located(self.CHECKBOX))
         self.click(self.CHECKBOX)
 
     @allure.step("Нажимаю кнопку удаления")
