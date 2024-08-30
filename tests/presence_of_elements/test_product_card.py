@@ -1,7 +1,8 @@
+import allure
 import pytest
 from page_objects.product_page import ProductPage
 
-
+@allure.title("Присутствие элементов на странице карточки товара")
 @pytest.mark.parametrize("product", ["MacBook"])
 def test_mac_card(browser, url, product):
     browser.get(url + f"en-gb/product/laptop-notebook/{product}")

@@ -1,6 +1,8 @@
+import allure
+
 from page_objects.register_page import RegisterPage
 
-
+@allure.title("Присутствие элементов на странице регистрации")
 def test_user_registration(browser, url):
     browser.get(url + "/index.php?route=account/register")
     register_page = RegisterPage(browser)

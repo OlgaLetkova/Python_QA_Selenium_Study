@@ -1,8 +1,9 @@
+import allure
 import pytest
 from page_objects.menu_catalog_element import MenuCatalogElement
 from page_objects.catalog_page import CatalogPage
 
-
+@allure.title("Присутствие элементов на странице каталога")
 @pytest.mark.parametrize(("section", "product"), [("Desktops", "Mac (1)"), ("Laptops & Notebooks", "Macs (0)")])
 def test_catalog_page(browser, url, section, product):
     browser.get(url)

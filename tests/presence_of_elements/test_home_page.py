@@ -1,6 +1,8 @@
+import allure
+
 from pages import HomePage
 
-
+@allure.title("Присутствие элементов на главной странице")
 def test_home_page(browser, url):
     browser.get(url)
     browser.find_element(*HomePage.SHOPPING_CART)
