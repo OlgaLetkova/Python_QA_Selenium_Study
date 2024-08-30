@@ -51,9 +51,9 @@ def test_add_new_product(browser, login_as_admin, section, item, general_data, t
             add_product_form.switch_tab(tab=tabs_list[0]["tab"])
             for data_row in second_tab_data:
                 add_product_form.input_product_field(field=data_row["field"], value=data_row["value"])
-                browser.execute_script("window.scrollBy(0,100)")
-                time.sleep(1)
-            browser.find_element(By.CSS_SELECTOR, 'html').send_keys(Keys.PAGE_UP)
+            #     browser.execute_script("window.scrollBy(0,100)")
+            #     time.sleep(1)
+            # browser.find_element(By.CSS_SELECTOR, 'html').send_keys(Keys.PAGE_UP)
             time.sleep(1)
 
             with allure.step("Заполняю форму добавления нового товара, вкладка SEO"):
