@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+  phpadmin:
+    image: 'phpmyadmin/phpmyadmin:5.2.1'
+    ports:
+      - '8091:80'
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - PMA_USER=bn_opencart
+    networks:
+      - selenoid
+
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.3
+    ports:
+      - '3306:3306'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_opencart
+      - MARIADB_DATABASE=bitnami_opencart
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+    networks:
+      - selenoid
+
+  opencart:
+    image: docker.io/bitnami/opencart:4
+    ports:
+      - '8080:8080'
+      - '443:8443'
+    environment:
+      - OPENCART_HOST=opencart:8080
+      # To change default opencart port next two lines should be uncommented
+      # - APACHE_HTTP_PORT_NUMBER=8090
+      # - OPENCART_EXTERNAL_HTTP_PORT_NUMBER=8090
+      - OPENCART_DATABASE_HOST=mariadb
+      - OPENCART_DATABASE_PORT_NUMBER=3306
+      - OPENCART_DATABASE_USER=bn_opencart
+      - OPENCART_DATABASE_NAME=bitnami_opencart
+      # Password for user@default.com (login 'user') administrator account
+      - OPENCART_PASSWORD=qwerty!123
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'opencart_data:/bitnami/opencart'
+      - 'opencart_storage_data:/bitnami/opencart_storage/'
+    depends_on:
+      - mariadb
+    networks:
+      - selenoid
+
+  tests:
+    image: tests:0.1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ./wait-for-it.sh opencart 8080 pytest -v tests/use_cases --run remote --url http://opencart:8080 --browser chrome  --executor 172.19.0.2
+    depends_on:
+      - opencart
+    networks:
+      - selenoid
+
+networks:
+  selenoid:
+    driver: bridge
+    external: true
+
+volumes:
+  mariadb_data:
+    driver: local
+  opencart_data:
+    driver: local
+  opencart_storage_data:
+    driver: local
